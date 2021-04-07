@@ -64,6 +64,7 @@ namespace BookBuddyFinal.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("ProductId,VendorId,ProductName,MetaTitle,ProductSummery,ProductDescription,ProductType,Sku,Price,Discount,Quantity,IsAvailable,CreatedAt,UpdatedAt,PublishedAt,StartsAt,EndsAt,ProductPic,ImageFile")] Products products)
         {
             if (ModelState.IsValid)
@@ -83,6 +84,7 @@ namespace BookBuddyFinal.Controllers
         }
 
         // GET: Products/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -104,6 +106,7 @@ namespace BookBuddyFinal.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("ProductId,VendorId,ProductName,MetaTitle,ProductSummery,ProductDescription,ProductType,Sku,Price,Discount,Quantity,IsAvailable,CreatedAt,UpdatedAt,PublishedAt,StartsAt,EndsAt,ProductPic")] Products products)
         {
             if (id != products.ProductId)
@@ -136,6 +139,7 @@ namespace BookBuddyFinal.Controllers
         }
 
         // GET: Products/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -157,6 +161,7 @@ namespace BookBuddyFinal.Controllers
         // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var products = await _context.Products.FindAsync(id);
