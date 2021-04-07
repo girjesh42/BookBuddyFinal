@@ -38,8 +38,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="ProductType" class="control-label"></label>
-                <input asp-for="ProductType" class="form-control" />
+                <select asp-for="ProductType" class="form-select">
+                    <option value="Old">Old Product</option>
+                    <option value="New">New Product</option>
+                </select>
                 <span asp-validation-for="ProductType" class="text-danger"></span>
+
             </div>
             <div class="form-group">
                 <label asp-for="Sku" class="control-label"></label>
