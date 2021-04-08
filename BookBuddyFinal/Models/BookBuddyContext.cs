@@ -19,6 +19,7 @@ namespace BookBuddyFinal.Models
         {
         }
 
+        public virtual DbSet<AddCart> AddCart { get; set; }
         public virtual DbSet<AspNetRoleClaims> AspNetRoleClaims { get; set; }
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
@@ -52,6 +53,30 @@ namespace BookBuddyFinal.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<AddCart>(entity =>
+            {
+                entity.HasKey(e => e.CartId)
+                    .HasName("PK__AddCart__415B03B8750349E5");
+
+                entity.Property(e => e.CartId).HasColumnName("cartId");
+
+                entity.Property(e => e.ProductId).HasColumnName("productId");
+
+                entity.Property(e => e.Quantity).HasColumnName("quantity");
+
+                entity.Property(e => e.UserId).HasColumnName("userId");
+
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.AddCart)
+                    .HasForeignKey(d => d.ProductId)
+                    .HasConstraintName("FK__AddCart__product__55009F39");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.AddCart)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK__AddCart__userId__55F4C372");
+            });
+
             modelBuilder.Entity<AspNetRoleClaims>(entity =>
             {
                 entity.HasIndex(e => e.RoleId);
@@ -152,9 +177,10 @@ namespace BookBuddyFinal.Models
 
             modelBuilder.Entity<Cart>(entity =>
             {
-                entity.Property(e => e.CartId)
-                    .HasColumnName("cart_id")
-                    .ValueGeneratedNever();
+                entity.HasKey(e => e.CartId)
+                    .HasName("PK__Cart__2EF52A27D79766C3");
+
+                entity.Property(e => e.CartId).HasColumnName("cart_id");
 
                 entity.Property(e => e.AddressId).HasColumnName("address_id");
 
@@ -166,6 +192,8 @@ namespace BookBuddyFinal.Models
                     .HasColumnName("created_at")
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Id).HasMaxLength(450);
 
                 entity.Property(e => e.SessionId)
                     .HasColumnName("session_id")
@@ -180,25 +208,20 @@ namespace BookBuddyFinal.Models
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.UserId).HasColumnName("userId");
-
                 entity.HasOne(d => d.Address)
                     .WithMany(p => p.Cart)
                     .HasForeignKey(d => d.AddressId)
-                    .HasConstraintName("FK__Cart__address_id__07C12930");
+                    .HasConstraintName("FK__Cart__address_id__498EEC8D");
 
-                entity.HasOne(d => d.User)
+                entity.HasOne(d => d.IdNavigation)
                     .WithMany(p => p.Cart)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Cart__userId__06CD04F7");
+                    .HasForeignKey(d => d.Id)
+                    .HasConstraintName("FK__Cart__Id__489AC854");
             });
 
             modelBuilder.Entity<CartItem>(entity =>
             {
-                entity.Property(e => e.CartItemId)
-                    .HasColumnName("cartItem_id")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.CartItemId).HasColumnName("cartItem_id");
 
                 entity.Property(e => e.CartId).HasColumnName("cart_id");
 
@@ -230,13 +253,13 @@ namespace BookBuddyFinal.Models
                     .WithMany(p => p.CartItem)
                     .HasForeignKey(d => d.CartId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__CartItem__cart_i__0D7A0286");
+                    .HasConstraintName("FK__CartItem__cart_i__503BEA1C");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.CartItem)
                     .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__CartItem__produc__0C85DE4D");
+                    .HasConstraintName("FK__CartItem__produc__4F47C5E3");
             });
 
             modelBuilder.Entity<Category>(entity =>

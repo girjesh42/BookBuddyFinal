@@ -11,6 +11,7 @@ using System.IO;
 using Microsoft.AspNetCore.Authorization;
 using BookBuddyFinal.Models.Home;
 using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
 namespace BookBuddyFinal.Controllers
 {
@@ -30,10 +31,17 @@ namespace BookBuddyFinal.Controllers
         // GET: Products
         public IActionResult Index(string search, int? page)
         {
-            var cart = new Cart();
-            _context.Cart.Add(cart);
-            _context.SaveChanges();
-            HttpContext.Session.SetString("cartId", cart.CartId.ToString());
+            //ClaimsPrincipal currentUser = this.User;
+            //var currentUserId = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var ci = HttpContext.Session.GetString("cartId");
+            if (string.IsNullOrEmpty(ci))
+            {
+                var cart = new Cart();
+                _context.Cart.Add(cart);
+                _context.SaveChanges();
+                HttpContext.Session.SetString("cartId", cart.CartId.ToString());
+            }
+            
                 HomeIndexViewModel model = new HomeIndexViewModel();
             return View(model.CreateModel(search, 4, page));
             

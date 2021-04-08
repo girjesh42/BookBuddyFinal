@@ -1,4 +1,6 @@
-﻿
+﻿@using Microsoft.AspNetCore.Http;
+@using BookBuddyFinal.Models;
+@inject IHttpContextAccessor HttpContextAccessor
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +18,7 @@
     <header>
         <nav class="navbar navbar-expand-md navbar-light bg-light border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Products" asp-action="Index"><h1 class="logo">Book<span>Buddy</span></h1></a>
+                <a class="navbar-brand" asp-area="" asp-controller="Products" asp-action="Index"><h1 style="white-space: nowrap;" class="logo">Book<span>Buddy</span></h1></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -44,10 +46,21 @@
                 </div>
 
             </div>
-           
-           
-            <i class="fas fa-shopping-cart" style="font-size: 2em;"></i>
-            <span class='badge badge-warning' id='lblCartCount'> @ViewBag.items </span>
+            @{ var items = 0;
+                var s = HttpContextAccessor.HttpContext.Session.GetString("cartId");
+                if (s != null)
+                {
+                    BookBuddyContext bbc = new BookBuddyContext();
+                    items = bbc.CartItem.Count(x => x.CartId == int.Parse(s));
+
+                }
+                <div style="white-space: nowrap;">
+                    <i class="fas fa-shopping-cart" style="font-size: 2em;"></i>
+                    <span class='badge badge-warning' id='lblCartCount'>@items</span>
+                </div>
+            }
+
+
         </nav>
     </header>
     <div class="container">

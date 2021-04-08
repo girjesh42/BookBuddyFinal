@@ -30,12 +30,12 @@ namespace BookBuddyFinal.Controllers
         {
             
             var product = ctxt.Products.Find(productId);
-            var cartItem = new CartItem { Product=product,Quantity=quantity,CartId=int.Parse(HttpContext.Session.GetString("cartId"))};
+            var cartItem = new CartItem { ProductId =product.ProductId,Quantity=quantity,CartId=int.Parse(HttpContext.Session.GetString("cartId"))};
             ctxt.CartItem.Add(cartItem);
             ctxt.SaveChanges();
             var items = ctxt.CartItem.Count(x => x.CartId == int.Parse(HttpContext.Session.GetString("cartId")));
             ViewBag.items = items;
-            return View("_Layout");
+            return RedirectToAction("Index","Products");
         }
         public IActionResult About()
         {

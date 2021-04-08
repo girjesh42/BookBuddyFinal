@@ -15,7 +15,7 @@ namespace BookBuddyFinal.Models
         }
 
         public int CartId { get; set; }
-        public int UserId { get; set; }
+        public string Id { get; set; }
         public string SessionId { get; set; }
         public string TokenId { get; set; }
         public string CartStatus { get; set; }
@@ -24,7 +24,7 @@ namespace BookBuddyFinal.Models
         public DateTime? UpdatedAt { get; set; }
 
         public virtual UsersAddress Address { get; set; }
-        public virtual Users User { get; set; }
+        public virtual AspNetUsers IdNavigation { get; set; }
         public virtual ICollection<CartItem> CartItem { get; set; }
     }
 }

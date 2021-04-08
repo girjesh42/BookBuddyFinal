@@ -66,19 +66,19 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <form method="get" asp-action="AddToCart" asp-controller="Home">
-                                <input type="hidden" value="@item.ProductId" />
+                            <form method="post" asp-action="AddToCart" asp-controller="Home">
+                                <input type="hidden" value="@item.ProductId" name="productId" />
                                 <button type="submit" id="addToCart" class="btn btn-primary btn-sm">Add to cart</button>
                                 <div class="float-right">
                                     <i class="fa fa-star star-active"></i>
                                     <span> 3.00</span>
                                 </div>
                             </form>
-                            <p>
+                            @*<p>
                                 <a asp-action="Edit" asp-route-id="@item.ProductId">Edit</a> |
                                 <a asp-action="Details" asp-route-id="@item.ProductId">Details</a> |
                                 <a asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
-                            </p>
+                            </p>*@
                         </div>
                     </div>
                 </div>
