@@ -55,8 +55,10 @@
 
                 }
                 <div style="white-space: nowrap;">
-                    <i class="fas fa-shopping-cart" style="font-size: 2em;"></i>
-                    <span class='badge badge-warning' id='lblCartCount'>@items</span>
+                                <a asp-controller="Home" asp-action="CartDetails" style="text-decoration:none;color:">
+                                    <i class="fas fa-shopping-cart" style="font-size: 2em;"></i>
+                                    <span class='badge badge-warning' id='lblCartCount'>@items</span>
+                                </a>
                 </div>
             }
 

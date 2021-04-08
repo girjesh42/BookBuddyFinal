@@ -233,3 +233,4 @@ C:\Users\Girjesh kumar\Desktop\BookBuddyFinal\BookBuddyFinal\BookBuddyFinal\bin\
 C:\Users\Girjesh kumar\Desktop\BookBuddyFinal\BookBuddyFinal\BookBuddyFinal\bin\Debug\netcoreapp3.1\X.PagedList.dll
 C:\Users\Girjesh kumar\Desktop\BookBuddyFinal\BookBuddyFinal\BookBuddyFinal\bin\Debug\netcoreapp3.1\X.PagedList.Mvc.Core.dll
 C:\Users\Girjesh kumar\Desktop\BookBuddyFinal\BookBuddyFinal\BookBuddyFinal\bin\Debug\netcoreapp3.1\X.PagedList.Web.Common.dll
+C:\Users\Girjesh kumar\Desktop\BookBuddyFinal\BookBuddyFinal\BookBuddyFinal\obj\Debug\netcoreapp3.1\Razor\Views\Home\CartDetails.cshtml.g.cs

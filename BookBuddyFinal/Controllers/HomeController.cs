@@ -37,6 +37,12 @@ namespace BookBuddyFinal.Controllers
             ViewBag.items = items;
             return RedirectToAction("Index","Products");
         }
+
+        public IActionResult CartDetails()
+        {
+            return View();
+        }
+
         public IActionResult About()
         {
             return View();
