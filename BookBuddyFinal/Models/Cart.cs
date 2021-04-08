@@ -19,7 +19,7 @@ namespace BookBuddyFinal.Models
         public string SessionId { get; set; }
         public string TokenId { get; set; }
         public string CartStatus { get; set; }
-        public int AddressId { get; set; }
+        public int? AddressId { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
 

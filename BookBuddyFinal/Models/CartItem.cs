@@ -12,13 +12,13 @@ namespace BookBuddyFinal.Models
         public int CartItemId { get; set; }
         public int ProductId { get; set; }
         public int CartId { get; set; }
-        public double Price { get; set; }
+        public double? Price { get; set; }
         public DateTime? PriceExpiresAt { get; set; }
-        public double Discount { get; set; }
+        public double? Discount { get; set; }
         public int Quantity { get; set; }
-        public bool IsActive { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
+        public bool? IsActive { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
         public virtual Cart Cart { get; set; }
         public virtual Products Product { get; set; }

@@ -1,5 +1,6 @@
 ﻿using BookBuddyFinal.Models;
 using BookBuddyFinal.Models.Home;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -27,11 +28,14 @@ namespace BookBuddyFinal.Controllers
 
         public IActionResult AddToCart(int productId,int quantity=1)
         {
-            var cart = new List<CartItemWithQuantity>();
-            var product = ctxt.Products.Find(productId);
-            cart.Add(new CartItemWithQuantity { products=product,Quantity=quantity});
             
-            return View();
+            var product = ctxt.Products.Find(productId);
+            var cartItem = new CartItem { Product=product,Quantity=quantity,CartId=int.Parse(HttpContext.Session.GetString("cartId"))};
+            ctxt.CartItem.Add(cartItem);
+            ctxt.SaveChanges();
+            var items = ctxt.CartItem.Count(x => x.CartId == int.Parse(HttpContext.Session.GetString("cartId")));
+            ViewBag.items = items;
+            return View("_Layout");
         }
         public IActionResult About()
         {

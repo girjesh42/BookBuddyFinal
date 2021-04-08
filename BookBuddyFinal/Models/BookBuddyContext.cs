@@ -159,7 +159,6 @@ namespace BookBuddyFinal.Models
                 entity.Property(e => e.AddressId).HasColumnName("address_id");
 
                 entity.Property(e => e.CartStatus)
-                    .IsRequired()
                     .HasColumnName("cart_status")
                     .HasMaxLength(10);
 
@@ -169,12 +168,10 @@ namespace BookBuddyFinal.Models
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.SessionId)
-                    .IsRequired()
                     .HasColumnName("session_id")
                     .HasMaxLength(100);
 
                 entity.Property(e => e.TokenId)
-                    .IsRequired()
                     .HasColumnName("token_id")
                     .HasMaxLength(100);
 
@@ -188,7 +185,6 @@ namespace BookBuddyFinal.Models
                 entity.HasOne(d => d.Address)
                     .WithMany(p => p.Cart)
                     .HasForeignKey(d => d.AddressId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Cart__address_id__07C12930");
 
                 entity.HasOne(d => d.User)

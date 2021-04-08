@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using Microsoft.AspNetCore.Authorization;
 using BookBuddyFinal.Models.Home;
+using Microsoft.AspNetCore.Http;
 
 namespace BookBuddyFinal.Controllers
 {
@@ -29,7 +30,11 @@ namespace BookBuddyFinal.Controllers
         // GET: Products
         public IActionResult Index(string search, int? page)
         {
-            HomeIndexViewModel model = new HomeIndexViewModel();
+            var cart = new Cart();
+            _context.Cart.Add(cart);
+            _context.SaveChanges();
+            HttpContext.Session.SetString("cartId", cart.CartId.ToString());
+                HomeIndexViewModel model = new HomeIndexViewModel();
             return View(model.CreateModel(search, 4, page));
             
         }
