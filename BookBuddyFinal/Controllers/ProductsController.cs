@@ -9,6 +9,7 @@ using BookBuddyFinal.Models;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using Microsoft.AspNetCore.Authorization;
+using BookBuddyFinal.Models.Home;
 
 namespace BookBuddyFinal.Controllers
 {
@@ -26,10 +27,11 @@ namespace BookBuddyFinal.Controllers
         }
 
         // GET: Products
-        public async Task<IActionResult> Index()
+        public IActionResult Index(string search, int? page)
         {
-            var bookBuddyContext = _context.Products.Include(p => p.Vendor);
-            return View(await bookBuddyContext.ToListAsync());
+            HomeIndexViewModel model = new HomeIndexViewModel();
+            return View(model.CreateModel(search, 4, page));
+            
         }
 
         // GET: Products/Details/5
@@ -56,6 +58,8 @@ namespace BookBuddyFinal.Controllers
         public IActionResult Create()
         {
             ViewData["VendorId"] = new SelectList(_context.Users, "UserId", "UserEmail");
+            ViewData["ProductCategory"] = new SelectList(_context.Category, "CategoryId", "CategoryName");
+
             return View();
         }
 

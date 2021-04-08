@@ -1,4 +1,5 @@
 ﻿using BookBuddyFinal.Models;
+using BookBuddyFinal.Models.Home;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,6 +12,7 @@ namespace BookBuddyFinal.Controllers
 {
     public class HomeController : Controller
     {
+        readonly BookBuddyContext ctxt = new BookBuddyContext();
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -23,15 +25,19 @@ namespace BookBuddyFinal.Controllers
             return View();
         }
 
+        public IActionResult AddToCart(int productId,int quantity=1)
+        {
+            var cart = new List<CartItemWithQuantity>();
+            var product = ctxt.Products.Find(productId);
+            cart.Add(new CartItemWithQuantity { products=product,Quantity=quantity});
+            
+            return View();
+        }
         public IActionResult About()
         {
             return View();
         }
         public IActionResult Contact()
-        {
-            return View();
-        }
-        public IActionResult Privacy()
         {
             return View();
         }
