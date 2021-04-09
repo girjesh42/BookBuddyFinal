@@ -69,10 +69,10 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <form method="post" asp-action="AddToCart" asp-controller="Home">
+                                <form method="post" asp-action="AddToCart" asp-controller="Cart" class="d-flex justify-content-between flex-nowrap align-items-center">
                                     <input type="hidden" value="@item.ProductId" name="productId" />
-                                    <button type="submit" id="addToCart" class="btn btn-primary btn-sm">Add to cart</button>
-                                    <div class="float-right">
+                                    <button type="submit" id="addToCart" class="btn btn-primary btn-sm" style="white-space: nowrap;margin-right:10px;">Add to cart</button>
+                                    <div class="float-right" style="white-space: nowrap;margin-right:10px;">
                                         <i class="fa fa-star star-active"></i>
                                         <span> 3.00</span>
                                     </div>

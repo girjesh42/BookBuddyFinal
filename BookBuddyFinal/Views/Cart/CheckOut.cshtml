@@ -1,0 +1,76 @@
+﻿@model BookBuddyFinal.Models.UsersAddress
+
+@{
+    ViewData["Title"] = "CheckOut";
+}
+
+<h1>CheckOut</h1>
+
+<h5>Enter Your Address</h5>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CheckOut">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group">
+                <label asp-for="UserCity" class="control-label">User City</label>
+                <input asp-for="UserCity" class="form-control" />
+                <span asp-validation-for="UserCity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserState" class="control-label">User State</label>
+                <input asp-for="UserState" class="form-control" />
+                <span asp-validation-for="UserState" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserPostalCode" class="control-label">Postal Code</label>
+                <input asp-for="UserPostalCode" class="form-control" />
+                <span asp-validation-for="UserPostalCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserCountry" class="control-label">Country</label>
+                <input asp-for="UserCountry" class="form-control" />
+                <span asp-validation-for="UserCountry" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserPhone1" class="control-label">Phone No.</label>
+                <input asp-for="UserPhone1" class="form-control" />
+                <span asp-validation-for="UserPhone1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserEmail1" class="control-label">Email Address</label>
+                <input asp-for="UserEmail1" class="form-control" />
+                <span asp-validation-for="UserEmail1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserCo" class="control-label">Name (C/O)</label>
+                <input asp-for="UserCo" class="form-control" />
+                <span asp-validation-for="UserCo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserAddress1" class="control-label">Line 1 </label>
+                <input asp-for="UserAddress1" class="form-control" />
+                <span asp-validation-for="UserAddress1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserAddress2" class="control-label">Line 2</label>
+                <input asp-for="UserAddress2" class="form-control" />
+                <span asp-validation-for="UserAddress2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserAddress3" class="control-label">Line 3</label>
+                <input asp-for="UserAddress3" class="form-control" />
+                <span asp-validation-for="UserAddress3" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
