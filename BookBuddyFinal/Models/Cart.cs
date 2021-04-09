@@ -12,6 +12,7 @@ namespace BookBuddyFinal.Models
         public Cart()
         {
             CartItem = new HashSet<CartItem>();
+            PlacedOrder = new HashSet<PlacedOrder>();
         }
 
         public int CartId { get; set; }
@@ -26,5 +27,6 @@ namespace BookBuddyFinal.Models
         public virtual UsersAddress Address { get; set; }
         public virtual AspNetUsers IdNavigation { get; set; }
         public virtual ICollection<CartItem> CartItem { get; set; }
+        public virtual ICollection<PlacedOrder> PlacedOrder { get; set; }
     }
 }

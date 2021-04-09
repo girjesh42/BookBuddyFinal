@@ -13,6 +13,7 @@ namespace BookBuddyFinal.Models
         {
             InverseParent = new HashSet<Category>();
             ProductCategory = new HashSet<ProductCategory>();
+            Products = new HashSet<Products>();
         }
 
         public int CategoryId { get; set; }
@@ -23,5 +24,6 @@ namespace BookBuddyFinal.Models
         public virtual Category Parent { get; set; }
         public virtual ICollection<Category> InverseParent { get; set; }
         public virtual ICollection<ProductCategory> ProductCategory { get; set; }
+        public virtual ICollection<Products> Products { get; set; }
     }
 }

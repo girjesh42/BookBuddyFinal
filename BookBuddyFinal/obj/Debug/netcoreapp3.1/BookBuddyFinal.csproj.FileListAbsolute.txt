@@ -236,3 +236,5 @@ C:\Users\Girjesh kumar\Desktop\BookBuddyFinal\BookBuddyFinal\BookBuddyFinal\bin\
 C:\Users\Girjesh kumar\Desktop\BookBuddyFinal\BookBuddyFinal\BookBuddyFinal\obj\Debug\netcoreapp3.1\Razor\Views\Home\CartDetails.cshtml.g.cs
 C:\Users\Girjesh kumar\Desktop\BookBuddyFinal\BookBuddyFinal\BookBuddyFinal\obj\Debug\netcoreapp3.1\Razor\Views\Cart\Index.cshtml.g.cs
 C:\Users\Girjesh kumar\Desktop\BookBuddyFinal\BookBuddyFinal\BookBuddyFinal\obj\Debug\netcoreapp3.1\Razor\Views\Cart\CheckOut.cshtml.g.cs
+C:\Users\Girjesh kumar\Desktop\BookBuddyFinal\BookBuddyFinal\BookBuddyFinal\obj\Debug\netcoreapp3.1\Razor\Views\Cart\Payment.cshtml.g.cs
+C:\Users\Girjesh kumar\Desktop\BookBuddyFinal\BookBuddyFinal\BookBuddyFinal\obj\Debug\netcoreapp3.1\Razor\Views\Cart\Order.cshtml.g.cs

@@ -16,6 +16,8 @@ namespace BookBuddyFinal.Models
             AspNetUserRoles = new HashSet<AspNetUserRoles>();
             AspNetUserTokens = new HashSet<AspNetUserTokens>();
             Cart = new HashSet<Cart>();
+            PlacedOrder = new HashSet<PlacedOrder>();
+            UsersAddress = new HashSet<UsersAddress>();
         }
 
         public string Id { get; set; }
@@ -39,5 +41,7 @@ namespace BookBuddyFinal.Models
         public virtual ICollection<AspNetUserRoles> AspNetUserRoles { get; set; }
         public virtual ICollection<AspNetUserTokens> AspNetUserTokens { get; set; }
         public virtual ICollection<Cart> Cart { get; set; }
+        public virtual ICollection<PlacedOrder> PlacedOrder { get; set; }
+        public virtual ICollection<UsersAddress> UsersAddress { get; set; }
     }
 }

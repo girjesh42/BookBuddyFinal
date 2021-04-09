@@ -14,7 +14,6 @@ namespace BookBuddyFinal.Models
     {
         public Products()
         {
-            AddCart = new HashSet<AddCart>();
             CartItem = new HashSet<CartItem>();
             OrderItem = new HashSet<OrderItem>();
             ProductCategory = new HashSet<ProductCategory>();
@@ -43,9 +42,10 @@ namespace BookBuddyFinal.Models
         [NotMapped]
         [DisplayName("Upload Product Pic")]
         public IFormFile ImageFile { get; set; }
+        public int? CategoryId { get; set; }
 
+        public virtual Category Category { get; set; }
         public virtual Users Vendor { get; set; }
-        public virtual ICollection<AddCart> AddCart { get; set; }
         public virtual ICollection<CartItem> CartItem { get; set; }
         public virtual ICollection<OrderItem> OrderItem { get; set; }
         public virtual ICollection<ProductCategory> ProductCategory { get; set; }

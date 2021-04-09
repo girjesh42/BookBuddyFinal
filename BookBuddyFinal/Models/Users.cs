@@ -11,12 +11,10 @@ namespace BookBuddyFinal.Models
     {
         public Users()
         {
-            AddCart = new HashSet<AddCart>();
             Order = new HashSet<Order>();
             Payment = new HashSet<Payment>();
             Products = new HashSet<Products>();
             UserLoginAttemptHistory = new HashSet<UserLoginAttemptHistory>();
-            UsersAddress = new HashSet<UsersAddress>();
         }
 
         public int UserId { get; set; }
@@ -33,11 +31,9 @@ namespace BookBuddyFinal.Models
         public string PasswordHash { get; set; }
         public bool? LockedOut { get; set; }
 
-        public virtual ICollection<AddCart> AddCart { get; set; }
         public virtual ICollection<Order> Order { get; set; }
         public virtual ICollection<Payment> Payment { get; set; }
         public virtual ICollection<Products> Products { get; set; }
         public virtual ICollection<UserLoginAttemptHistory> UserLoginAttemptHistory { get; set; }
-        public virtual ICollection<UsersAddress> UsersAddress { get; set; }
     }
 }

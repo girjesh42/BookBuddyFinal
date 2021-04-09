@@ -13,10 +13,10 @@ namespace BookBuddyFinal.Models
         {
             Cart = new HashSet<Cart>();
             Order = new HashSet<Order>();
+            PlacedOrder = new HashSet<PlacedOrder>();
         }
 
         public int UserAddressId { get; set; }
-        public int UserId { get; set; }
         public string UserCity { get; set; }
         public string UserState { get; set; }
         public int UserPostalCode { get; set; }
@@ -29,9 +29,11 @@ namespace BookBuddyFinal.Models
         public string UserAddress1 { get; set; }
         public string UserAddress2 { get; set; }
         public string UserAddress3 { get; set; }
+        public string UserId { get; set; }
 
-        public virtual Users User { get; set; }
+        public virtual AspNetUsers User { get; set; }
         public virtual ICollection<Cart> Cart { get; set; }
         public virtual ICollection<Order> Order { get; set; }
+        public virtual ICollection<PlacedOrder> PlacedOrder { get; set; }
     }
 }

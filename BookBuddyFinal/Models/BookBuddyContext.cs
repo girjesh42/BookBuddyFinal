@@ -19,7 +19,6 @@ namespace BookBuddyFinal.Models
         {
         }
 
-        public virtual DbSet<AddCart> AddCart { get; set; }
         public virtual DbSet<AspNetRoleClaims> AspNetRoleClaims { get; set; }
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
@@ -30,9 +29,11 @@ namespace BookBuddyFinal.Models
         public virtual DbSet<Cart> Cart { get; set; }
         public virtual DbSet<CartItem> CartItem { get; set; }
         public virtual DbSet<Category> Category { get; set; }
+        public virtual DbSet<Ebook> Ebook { get; set; }
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<OrderItem> OrderItem { get; set; }
         public virtual DbSet<Payment> Payment { get; set; }
+        public virtual DbSet<PlacedOrder> PlacedOrder { get; set; }
         public virtual DbSet<ProductCategory> ProductCategory { get; set; }
         public virtual DbSet<ProductReview> ProductReview { get; set; }
         public virtual DbSet<ProductTag> ProductTag { get; set; }
@@ -53,30 +54,6 @@ namespace BookBuddyFinal.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<AddCart>(entity =>
-            {
-                entity.HasKey(e => e.CartId)
-                    .HasName("PK__AddCart__415B03B8750349E5");
-
-                entity.Property(e => e.CartId).HasColumnName("cartId");
-
-                entity.Property(e => e.ProductId).HasColumnName("productId");
-
-                entity.Property(e => e.Quantity).HasColumnName("quantity");
-
-                entity.Property(e => e.UserId).HasColumnName("userId");
-
-                entity.HasOne(d => d.Product)
-                    .WithMany(p => p.AddCart)
-                    .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("FK__AddCart__product__55009F39");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.AddCart)
-                    .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK__AddCart__userId__55F4C372");
-            });
-
             modelBuilder.Entity<AspNetRoleClaims>(entity =>
             {
                 entity.HasIndex(e => e.RoleId);
@@ -283,6 +260,14 @@ namespace BookBuddyFinal.Models
                     .HasConstraintName("FK__Category__parent__6B24EA82");
             });
 
+            modelBuilder.Entity<Ebook>(entity =>
+            {
+                entity.HasKey(e => e.Bid)
+                    .HasName("PK__Ebook__C6D111C9A4FD3F58");
+
+                entity.Property(e => e.Bookname).HasMaxLength(100);
+            });
+
             modelBuilder.Entity<Order>(entity =>
             {
                 entity.ToTable("Order_");
@@ -443,6 +428,36 @@ namespace BookBuddyFinal.Models
                     .HasConstraintName("FK__Payment__userId__1EA48E88");
             });
 
+            modelBuilder.Entity<PlacedOrder>(entity =>
+            {
+                entity.ToTable("placedOrder");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.AddressId).HasColumnName("addressId");
+
+                entity.Property(e => e.CartId).HasColumnName("cartId");
+
+                entity.Property(e => e.UserId)
+                    .HasColumnName("userId")
+                    .HasMaxLength(450);
+
+                entity.HasOne(d => d.Address)
+                    .WithMany(p => p.PlacedOrder)
+                    .HasForeignKey(d => d.AddressId)
+                    .HasConstraintName("FK__placedOrd__addre__5D95E53A");
+
+                entity.HasOne(d => d.Cart)
+                    .WithMany(p => p.PlacedOrder)
+                    .HasForeignKey(d => d.CartId)
+                    .HasConstraintName("FK__placedOrd__cartI__5CA1C101");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.PlacedOrder)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK__placedOrd__userI__5E8A0973");
+            });
+
             modelBuilder.Entity<ProductCategory>(entity =>
             {
                 entity.Property(e => e.ProductCategoryId).HasColumnName("productCategory_id");
@@ -534,6 +549,8 @@ namespace BookBuddyFinal.Models
 
                 entity.Property(e => e.ProductId).HasColumnName("product_id");
 
+                entity.Property(e => e.CategoryId).HasColumnName("category_id");
+
                 entity.Property(e => e.CreatedAt)
                     .HasColumnName("created_at")
                     .HasColumnType("datetime")
@@ -599,6 +616,11 @@ namespace BookBuddyFinal.Models
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.VendorId).HasColumnName("vendor_id");
+
+                entity.HasOne(d => d.Category)
+                    .WithMany(p => p.Products)
+                    .HasForeignKey(d => d.CategoryId)
+                    .HasConstraintName("FK__Products__catego__59C55456");
 
                 entity.HasOne(d => d.Vendor)
                     .WithMany(p => p.Products)
@@ -748,7 +770,9 @@ namespace BookBuddyFinal.Models
                     .HasColumnName("user_email2")
                     .HasMaxLength(50);
 
-                entity.Property(e => e.UserId).HasColumnName("userId");
+                entity.Property(e => e.UserId)
+                    .HasColumnName("userId")
+                    .HasMaxLength(450);
 
                 entity.Property(e => e.UserPhone1)
                     .HasColumnName("user_phone1")
@@ -767,8 +791,7 @@ namespace BookBuddyFinal.Models
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.UsersAddress)
                     .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Users_add__userI__68487DD7");
+                    .HasConstraintName("FK__Users_add__userI__58D1301D");
             });
 
             OnModelCreatingPartial(modelBuilder);
