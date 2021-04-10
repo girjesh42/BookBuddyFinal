@@ -67,7 +67,7 @@ namespace BookBuddyFinal.Controllers
         }
 
         // GET: Products/Create
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             ViewData["VendorId"] = new SelectList(_context.Users, "UserId", "UserEmail");

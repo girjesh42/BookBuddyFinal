@@ -238,3 +238,11 @@ C:\Users\Girjesh kumar\Desktop\BookBuddyFinal\BookBuddyFinal\BookBuddyFinal\obj\
 C:\Users\Girjesh kumar\Desktop\BookBuddyFinal\BookBuddyFinal\BookBuddyFinal\obj\Debug\netcoreapp3.1\Razor\Views\Cart\CheckOut.cshtml.g.cs
 C:\Users\Girjesh kumar\Desktop\BookBuddyFinal\BookBuddyFinal\BookBuddyFinal\obj\Debug\netcoreapp3.1\Razor\Views\Cart\Payment.cshtml.g.cs
 C:\Users\Girjesh kumar\Desktop\BookBuddyFinal\BookBuddyFinal\BookBuddyFinal\obj\Debug\netcoreapp3.1\Razor\Views\Cart\Order.cshtml.g.cs
+C:\Users\Girjesh kumar\Desktop\BookBuddyFinal\BookBuddyFinal\BookBuddyFinal\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Create.cshtml.g.cs
+C:\Users\Girjesh kumar\Desktop\BookBuddyFinal\BookBuddyFinal\BookBuddyFinal\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Index.cshtml.g.cs
+C:\Users\Girjesh kumar\Desktop\BookBuddyFinal\BookBuddyFinal\BookBuddyFinal\obj\Debug\netcoreapp3.1\Razor\Views\Shared\NotFound.cshtml.g.cs
+C:\Users\Girjesh kumar\Desktop\BookBuddyFinal\BookBuddyFinal\BookBuddyFinal\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Edit.cshtml.g.cs
+C:\Users\Girjesh kumar\Desktop\BookBuddyFinal\BookBuddyFinal\BookBuddyFinal\obj\Debug\netcoreapp3.1\Razor\Views\Admin\EditRole.cshtml.g.cs
+C:\Users\Girjesh kumar\Desktop\BookBuddyFinal\BookBuddyFinal\BookBuddyFinal\obj\Debug\netcoreapp3.1\Razor\Views\Admin\EditUsersInRole.cshtml.g.cs
+C:\Users\Girjesh kumar\Desktop\BookBuddyFinal\BookBuddyFinal\BookBuddyFinal\bin\Debug\netcoreapp3.1\SendGrid.dll
+C:\Users\Girjesh kumar\Desktop\BookBuddyFinal\BookBuddyFinal\BookBuddyFinal\bin\Debug\netcoreapp3.1\StarkbankEcdsa.dll

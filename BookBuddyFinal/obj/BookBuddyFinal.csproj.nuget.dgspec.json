@@ -74,6 +74,10 @@
               "target": "Package",
               "version": "[3.1.5, )"
             },
+            "SendGrid": {
+              "target": "Package",
+              "version": "[9.22.0, )"
+            },
             "X.PagedList.Mvc.Core": {
               "target": "Package",
               "version": "[8.0.7, )"

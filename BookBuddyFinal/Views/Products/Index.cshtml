@@ -3,15 +3,21 @@
 @using X.PagedList.Mvc.Core;
 @using X.PagedList.Mvc.Core.Common;
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<IdentityUser> signInManager
 @{
     ViewData["Title"] = "Index";
 }
 
 <h1>Books</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
+@if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
 
 
 <div class="container-fluid">
@@ -21,29 +27,29 @@
 
 
         @*<div class="col-sm-6 col-md-4 col-lg-3 col-xl-3">
-            <div class="card">
-                <div style="text-align:center">
-                    <a href="/Product/103">
-                        <img class="card-img-top img-fluid" src="https://rukminim1.flixcart.com/image/416/416/k2w6xe80/book/1/6/6/success-secrets-of-amazon-original-imafm3nymrhu5nxh.jpeg" alt="Success Secrets of Amazon  (English, Paperback, unknown)">
-                    </a>
-                </div>
-                <div class="card-block">
-                    <a href="/Product/103" class="card-title text-muted" title="Success Secrets of Amazon  (English, Paperback, unknown)">Success Secrets of Amazon  (English, Paperback, unknown)</a>
-                    <div class="card-text">
-                        ₹300
+                <div class="card">
+                    <div style="text-align:center">
+                        <a href="/Product/103">
+                            <img class="card-img-top img-fluid" src="https://rukminim1.flixcart.com/image/416/416/k2w6xe80/book/1/6/6/success-secrets-of-amazon-original-imafm3nymrhu5nxh.jpeg" alt="Success Secrets of Amazon  (English, Paperback, unknown)">
+                        </a>
+                    </div>
+                    <div class="card-block">
+                        <a href="/Product/103" class="card-title text-muted" title="Success Secrets of Amazon  (English, Paperback, unknown)">Success Secrets of Amazon  (English, Paperback, unknown)</a>
+                        <div class="card-text">
+                            ₹300
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <form method="post" action="/Cart/Add">
+                            <button type="submit" id="addToCart" class="btn btn-primary btn-sm">Add to cart</button>
+                            <div class="float-right">
+                                <i class="fa fa-star star-active"></i>
+                                <span> 3.00</span>
+                            </div>
+                        </form>
                     </div>
                 </div>
-                <div class="card-footer">
-                    <form method="post" action="/Cart/Add">
-                        <button type="submit" id="addToCart" class="btn btn-primary btn-sm">Add to cart</button>
-                        <div class="float-right">
-                            <i class="fa fa-star star-active"></i>
-                            <span> 3.00</span>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>*@
+            </div>*@
 
 
 
@@ -68,6 +74,15 @@
                                     ₹ @Html.DisplayFor(modelItem => item.Price)
                                 </div>
                             </div>
+
+                            @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                            {
+                                <p style="text-align:center">
+                                    <a asp-action="Edit" asp-route-id="@item.ProductId">Edit</a> |
+                                    <a asp-action="Details" asp-route-id="@item.ProductId">Details</a> |
+                                    <a asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
+                                </p>
+                            }
                             <div class="card-footer">
                                 <form method="post" asp-action="AddToCart" asp-controller="Cart" class="d-flex justify-content-between flex-nowrap align-items-center">
                                     <input type="hidden" value="@item.ProductId" name="productId" />
@@ -77,11 +92,7 @@
                                         <span> 4.00</span>
                                     </div>
                                 </form>
-                                @*<p>
-                                    <a asp-action="Edit" asp-route-id="@item.ProductId">Edit</a> |
-                                    <a asp-action="Details" asp-route-id="@item.ProductId">Details</a> |
-                                    <a asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
-                                </p>*@
+
                             </div>
                         </div>
                     </div>
@@ -92,12 +103,12 @@
         }
         else
         {
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>Sorry!!!</strong> We do not have Books Based on chosen criteria currently. <a asp-controller="Products" asp-action="Index" class="alert-link">Try some great Books instead!!!</a>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Sorry!!!</strong> We do not have Books Based on chosen criteria currently. <a asp-controller="Products" asp-action="Index" class="alert-link">Try some great Books instead!!!</a>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         }
     </div>
     @Html.PagedListPager(Model.ListOfProducts, page => Url.Action("Index", new { page, search = Context.Request.Query["search"].ToString() }), new PagedListRenderOptions()
@@ -111,5 +122,5 @@
    })
 </div>
 
-        
+
 
