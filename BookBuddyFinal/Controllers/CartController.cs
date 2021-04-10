@@ -88,6 +88,7 @@ namespace BookBuddyFinal.Controllers
             {
                 return RedirectToAction("Index", "Cart");
             }
+            
             else
             {
                 return RedirectToAction("Index", "Products");
@@ -106,7 +107,7 @@ namespace BookBuddyFinal.Controllers
 
             var cartId = int.Parse(s);
             var product = _context.Products.Find(productId);
-            var cartItem = new CartItem { ProductId = product.ProductId, Quantity = quantity, CartId = cartId };
+            //var cartItem = new CartItem { ProductId = product.ProductId, Quantity = quantity, CartId = cartId };
             var dupProduct = _context.CartItem.SingleOrDefault(x => x.CartId == cartId && x.ProductId == productId);
             if (dupProduct == null)
             {

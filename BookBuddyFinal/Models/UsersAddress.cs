@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
 // If you have enabled NRTs for your project, then un-comment the following line:
@@ -21,6 +22,8 @@ namespace BookBuddyFinal.Models
         public string UserState { get; set; }
         public int UserPostalCode { get; set; }
         public string UserCountry { get; set; }
+        [Required(ErrorMessage = "Required")]
+        [RegularExpression(@"^(\d{10})$", ErrorMessage = "Wrong mobile")]
         public string UserPhone1 { get; set; }
         public string UserPhone2 { get; set; }
         public string UserEmail1 { get; set; }

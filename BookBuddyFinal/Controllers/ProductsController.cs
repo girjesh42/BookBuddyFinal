@@ -141,11 +141,20 @@ namespace BookBuddyFinal.Controllers
                 try
                 {
                     string rootPath = _hostEnvironment.WebRootPath;
-                    string fileName = Path.GetFileName(products.ImageFile.FileName);
-                    string pPath = Path.Combine(rootPath + "/Images/", fileName);
-                    products.ProductPic = fileName;
-                    var filStream = new FileStream(pPath, FileMode.Create);
-                    await products.ImageFile.CopyToAsync(filStream);
+                    try
+                    {
+                        string fileName = Path.GetFileName(products.ImageFile.FileName);
+                        string pPath = Path.Combine(rootPath + "/Images/", fileName);
+                        products.ProductPic = fileName;
+                        var filStream = new FileStream(pPath, FileMode.Create);
+                        await products.ImageFile.CopyToAsync(filStream);
+
+                    }
+                    catch
+                    {
+
+                    }
+                    
                     _context.Update(products);
                     await _context.SaveChangesAsync();
                 }
@@ -201,7 +210,7 @@ namespace BookBuddyFinal.Controllers
             {
                 await _context.SaveChangesAsync();
 
-            }catch(Exception e)
+            }catch(Exception)
             {
                 return View("Error");
             }

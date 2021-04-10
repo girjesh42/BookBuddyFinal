@@ -99,7 +99,7 @@ namespace BookBuddyFinal.Controllers
             {
                 role.Name = model.RoleName;
                 var result = await roleManager.UpdateAsync(role);
-                if (result.Succeeded) return RedirectToAction("ListRoles");
+                if (result.Succeeded) return RedirectToAction("Index","Admin");
 
                 foreach (var error in result.Errors)
                 {
