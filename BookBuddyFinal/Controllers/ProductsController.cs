@@ -56,6 +56,7 @@ namespace BookBuddyFinal.Controllers
             }
 
             var products = await _context.Products
+                .Include(p => p.Category)
                 .Include(p => p.Vendor)
                 .FirstOrDefaultAsync(m => m.ProductId == id);
             if (products == null)
@@ -71,7 +72,7 @@ namespace BookBuddyFinal.Controllers
         public IActionResult Create()
         {
             ViewData["VendorId"] = new SelectList(_context.Users, "UserId", "UserEmail");
-            ViewData["ProductCategory"] = new SelectList(_context.Category, "CategoryId", "CategoryName");
+            ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "CategoryName");
 
             return View();
         }
@@ -81,8 +82,8 @@ namespace BookBuddyFinal.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
-        public async Task<IActionResult> Create([Bind("ProductId,VendorId,ProductName,MetaTitle,ProductSummery,ProductDescription,ProductType,Sku,Price,Discount,Quantity,IsAvailable,CreatedAt,UpdatedAt,PublishedAt,StartsAt,EndsAt,ProductPic,ImageFile")] Products products)
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Create([Bind("ProductId,VendorId,ProductName,MetaTitle,ProductSummery,ProductDescription,ProductType,Sku,Price,Discount,Quantity,IsAvailable,CreatedAt,UpdatedAt,PublishedAt,StartsAt,EndsAt,CategoryId,ProductPic,ImageFile")] Products products)
         {
             if (ModelState.IsValid)
             {
@@ -97,11 +98,13 @@ namespace BookBuddyFinal.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["VendorId"] = new SelectList(_context.Users, "UserId", "UserEmail", products.VendorId);
+            ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "CategoryName", products.CategoryId);
+
             return View(products);
         }
 
         // GET: Products/Edit/5
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -115,6 +118,8 @@ namespace BookBuddyFinal.Controllers
                 return NotFound();
             }
             ViewData["VendorId"] = new SelectList(_context.Users, "UserId", "UserEmail", products.VendorId);
+            ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "CategoryName", products.CategoryId);
+
             return View(products);
         }
 
@@ -123,8 +128,8 @@ namespace BookBuddyFinal.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductId,VendorId,ProductName,MetaTitle,ProductSummery,ProductDescription,ProductType,Sku,Price,Discount,Quantity,IsAvailable,CreatedAt,UpdatedAt,PublishedAt,StartsAt,EndsAt,ProductPic")] Products products)
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Edit(int id, [Bind("ProductId,VendorId,ProductName,MetaTitle,ProductSummery,ProductDescription,ProductType,Sku,Price,Discount,Quantity,IsAvailable,CreatedAt,UpdatedAt,PublishedAt,StartsAt,EndsAt,ProductPic,CategoryId,ImageFile")] Products products)
         {
             if (id != products.ProductId)
             {
@@ -135,6 +140,12 @@ namespace BookBuddyFinal.Controllers
             {
                 try
                 {
+                    string rootPath = _hostEnvironment.WebRootPath;
+                    string fileName = Path.GetFileName(products.ImageFile.FileName);
+                    string pPath = Path.Combine(rootPath + "/Images/", fileName);
+                    products.ProductPic = fileName;
+                    var filStream = new FileStream(pPath, FileMode.Create);
+                    await products.ImageFile.CopyToAsync(filStream);
                     _context.Update(products);
                     await _context.SaveChangesAsync();
                 }
@@ -152,11 +163,13 @@ namespace BookBuddyFinal.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["VendorId"] = new SelectList(_context.Users, "UserId", "UserEmail", products.VendorId);
+            ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "CategoryName", products.CategoryId);
+
             return View(products);
         }
 
         // GET: Products/Delete/5
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -165,6 +178,7 @@ namespace BookBuddyFinal.Controllers
             }
 
             var products = await _context.Products
+                .Include(p => p.Category)
                 .Include(p => p.Vendor)
                 .FirstOrDefaultAsync(m => m.ProductId == id);
             if (products == null)
@@ -178,12 +192,20 @@ namespace BookBuddyFinal.Controllers
         // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var products = await _context.Products.FindAsync(id);
             _context.Products.Remove(products);
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.SaveChangesAsync();
+
+            }catch(Exception e)
+            {
+                return View("Error");
+            }
+            
             return RedirectToAction(nameof(Index));
         }
 

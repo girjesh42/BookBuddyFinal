@@ -17,6 +17,7 @@
     <p>
         <a asp-action="Create">Create New</a>
     </p>
+    <a asp-controller="Admin" asp-action="Index" class="btn btn-success">Manage Role</a>
 }
 
 
@@ -86,7 +87,7 @@
                             <div class="card-footer">
                                 <form method="post" asp-action="AddToCart" asp-controller="Cart" class="d-flex justify-content-between flex-nowrap align-items-center">
                                     <input type="hidden" value="@item.ProductId" name="productId" />
-                                    <button type="submit" id="addToCart" class="btn btn-primary btn-sm" style="white-space: nowrap;margin-right:10px;">Add to cart</button>
+                                    <button type="submit" id="addToCart" class="btn btn-primary btn-sm" style="white-space: nowrap;">Add to cart</button>
                                     <div class="float-right" style="white-space: nowrap;margin-right:10px;">
                                         <i class="fa fa-star star-active"></i>
                                         <span> 4.00</span>
