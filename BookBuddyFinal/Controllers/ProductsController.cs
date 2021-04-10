@@ -42,7 +42,7 @@ namespace BookBuddyFinal.Controllers
                 HttpContext.Session.SetString("cartId", cart.CartId.ToString());
             }
             
-                HomeIndexViewModel model = new HomeIndexViewModel();
+            HomeIndexViewModel model = new HomeIndexViewModel();
             return View(model.CreateModel(search, 4, page));
             
         }

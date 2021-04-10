@@ -10223,19 +10223,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Girjesh kumar\\.nuget\\packages\\": {}
+    "C:\\Users\\hp\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Girjesh kumar\\Desktop\\BookBuddyFinal\\BookBuddyFinal\\BookBuddyFinal\\BookBuddyFinal.csproj",
+      "projectUniqueName": "C:\\Users\\hp\\Desktop\\BBuddyppt\\BookBuddyFinal\\BookBuddyFinal.csproj",
       "projectName": "BookBuddyFinal",
-      "projectPath": "C:\\Users\\Girjesh kumar\\Desktop\\BookBuddyFinal\\BookBuddyFinal\\BookBuddyFinal\\BookBuddyFinal.csproj",
-      "packagesPath": "C:\\Users\\Girjesh kumar\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Girjesh kumar\\Desktop\\BookBuddyFinal\\BookBuddyFinal\\BookBuddyFinal\\obj\\",
+      "projectPath": "C:\\Users\\hp\\Desktop\\BBuddyppt\\BookBuddyFinal\\BookBuddyFinal.csproj",
+      "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\hp\\Desktop\\BBuddyppt\\BookBuddyFinal\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Girjesh kumar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -10318,7 +10318,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

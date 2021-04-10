@@ -1,120 +1,114 @@
 ﻿@model BookBuddyFinal.Models.Products
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
 
-<div>
-    <h4>Products</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProductName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProductName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MetaTitle)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MetaTitle)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProductSummery)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProductSummery)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProductDescription)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProductDescription)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProductType)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProductType)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Sku)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Sku)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Discount)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Discount)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Quantity)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Quantity)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsAvailable)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsAvailable)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedAt)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UpdatedAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UpdatedAt)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PublishedAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PublishedAt)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StartsAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StartsAt)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EndsAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EndsAt)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProductPic)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProductPic)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Vendor)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Vendor.UserEmail)
-        </dd>
-    </dl>
+@*<div>
+        <a asp-action="Edit" asp-route-id="@Model.ProductId">Edit</a> |
+        <a asp-action="Index">Back to List</a>    style="border:1px solid #f0f0f0"
+    </div>*@
+
+
+<div class="container-fluid m-1">
+    <div class="row">
+        <div class="col-md-5 col-sm col ">
+            <div class="thumbnail ">
+                <div class="text-center  p-3 shadow mb-4 bg-white rounded">
+                    <img  src=@("/Images/"+Model.ProductPic) class="img-responsive img-fluid" alt="product image">
+                </div>
+                <div class="caption m-1">         
+                    <form method="post" asp-action="AddToCart" asp-controller="Cart">
+                        <input type="hidden" value="@(Model.ProductId)" name="productId" />
+                        @if (Model.IsAvailable && Model.Quantity >= 0)
+                        { 
+                            <div class="row buttons">
+                                <button type="submit" class="col btn btn-lg btn-primary shadow p-2 m-1 rounded-0" name="addToCart" value="addtocart"><i class="fas fa-cart-arrow-down"></i> ADD TO CART</button>
+                                <button type="submit" class="col btn btn-lg btn-warning shadow p-2 m-1 rounded-0" name="buyNow" value="buynow"><i class="fas fa-shopping-bag"></i> BUY NOW</button>
+                            </div>
+                        }
+                        else
+                        {
+                            <button class="btn  btn-danger" disabled>This book is out of stock</button>
+                        }
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-7  col-sm col desc">
+            <h4 class="text-uppercase">@(Model.ProductName) (@(Model.ProductType))</h4>
+            <div class="row">
+                <div class="col">
+                    <strong> Rating</strong>&nbsp; <span class="fa fa-star star-active"></span>4.00
+                </div>
+            </div>
+            <div>
+                <h3><i class="fas fa-rupee-sign"></i> @(Model.Price)</h3>
+            </div>
+            <div>
+                <h6><i class="text-success fas fa-tags"></i> Cash On Delivery <a class="disabled" href="#">T&C</a></h6>
+                <h6><i class="text-success fas fa-tags"></i> 7 Days return policy <a class="disabled" href="#">T&C</a></h6>
+                <h6>
+                    <i class="fas fa-tags"></i> Stock Availability :
+                    @if (Model.IsAvailable)
+                    {
+                        <span class="text-success">Hurry up!! @(Model.Quantity)&nbsp; Books left in stock</span> }
+                    else
+                    {
+                        <span class="text-danger">Currently This book is not available </span>
+                    }
+                </h6>
+            </div>
+            <br>
+
+            <div id="highlights">
+                <strong class="text-secondary">Highlights</strong>
+                <ul>
+                    <li>  @(Model.MetaTitle)</li>
+                    <li>  @(Model.ProductType) Book</li>
+                </ul>
+            </div>
+            <div id="seller">
+                <strong  class="text-secondary">Seller Info</strong>
+                <ul>
+                    <li>  @(Model.Vendor.UserFname)</li>
+                    <li> Contact at :<a class="disabled" href="#"> @(Model.Vendor.UserEmail)</a></li>
+                </ul>
+            </div>
+
+            <div class="container" style="margin-top:50px;">
+                <!-- Specifications -->
+                <div class="panel panel-default" id="specifications">
+                    <div class="panel-heading" style="background-color:#fff;">
+                        <h3>Specifications</h3>
+                    </div>
+                    <hr class="shadow" />
+                    <div class="panel-body">
+                        <h5  class="text-secondary">Book Details</h5>
+                        <table class="table  table-striped">
+                            <tbody>
+                                <tr>
+                                    <td>Genre</td>
+                                    <td class=" text-left">@(Model.ProductSummery)</td>
+                                </tr>
+                                <tr>
+                                    <td class="">Meta Title</td>
+                                    <td class="text-left"> @(Model.MetaTitle)</td>
+                                </tr>
+                                <tr>
+                                    <td class="">Product type</td>
+                                    <td class="text-left">@(Model.ProductType)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.ProductId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+

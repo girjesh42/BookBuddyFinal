@@ -60,7 +60,7 @@ namespace BookBuddyFinal.Controllers
             return View(cartItems);
         }
 
-        public IActionResult AddToCart(int productId, int quantity = 1,string redirect="yes")
+        public IActionResult AddToCart(int productId, string buyNow ,int quantity = 1,string redirect="yes")
         {
             var s = HttpContext.Session.GetString("cartId");
             if (string.IsNullOrEmpty(s))
@@ -68,7 +68,7 @@ namespace BookBuddyFinal.Controllers
                 return RedirectToAction("Index", "Products");
 
             }
-
+            
             var cartId = int.Parse(s);
             var product = _context.Products.Find(productId);
             var cartItem = new CartItem { ProductId = product.ProductId, Quantity = quantity, CartId = cartId };
@@ -84,7 +84,7 @@ namespace BookBuddyFinal.Controllers
 
             _context.SaveChanges();
             var items = _context.CartItem.Count(x => x.CartId == cartId);
-            if (redirect=="no")
+            if (redirect=="no" || buyNow=="buynow")
             {
                 return RedirectToAction("Index", "Cart");
             }
@@ -194,5 +194,9 @@ namespace BookBuddyFinal.Controllers
 
             return View();
         }
+
     }
+
+
+
 }
